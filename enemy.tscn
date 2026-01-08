@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://nah222fsur7i"]
+
+[ext_resource type="Script" uid="uid://ds0mm5e6k7o4y" path="res://enemy.gd" id="1_7k104"]
+[ext_resource type="Script" uid="uid://q8mbobkn0lmq" path="res://health_component.gd" id="2_4gyqm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
+radius = 0.5991211
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi2p4"]
+albedo_color = Color(1, 0.52156866, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_iifgy"]
+material = SubResource("StandardMaterial3D_qi2p4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_epg4t"]
+
+[node name="enemy" type="CharacterBody3D" unique_id=481901153 node_paths=PackedStringArray("status", "health_label", "hp") groups=["Enemy", "Kickable"]]
+transform = Transform3D(0.9999938, 5.3166073e-05, -0.0035258736, -3.7875183e-05, 0.9999906, 0.0043311254, 0.003526071, -0.0043309643, 0.9999844, 0, 0, 0)
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_7k104")
+status = NodePath("status")
+health_label = NodePath("status/health")
+hp = NodePath("HealthComponent")
+movement_speed = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1493163252]
+transform = Transform3D(1, 6.548362e-11, -3.259629e-09, -1.05501385e-10, 1, 1.6298145e-08, 0, -1.3504177e-08, 0.9999983, 5.456968e-12, 1, -9.313226e-10)
+shape = SubResource("CapsuleShape3D_4gyqm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1800535641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_iifgy")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1726940107]
+transform = Transform3D(0.5069154, 1.1368684e-12, 1.1641532e-10, 9.094947e-13, 0.24885674, 5.820766e-10, 3.4924597e-10, 0, 0.35349813, -0.01172842, 1.407551, -0.42573684)
+mesh = SubResource("BoxMesh_epg4t")
+
+[node name="status" type="Label3D" parent="." unique_id=226891058]
+transform = Transform3D(1, 3.637979e-12, -2.3283064e-10, -3.637979e-12, 1, 4.656613e-10, 0, -4.656613e-10, 0.99999994, -8.262292e-05, 2.1803024, 0.0094432505)
+billboard = 1
+text = "test
+"
+font_size = 50
+
+[node name="health" type="Label3D" parent="status" unique_id=378215538]
+transform = Transform3D(1, 3.637979e-12, 0, -5.456968e-12, 1, 1.8626451e-09, 0, -1.3969839e-09, 0.9999999, 0.37287313, 1.9788742e-05, -0.0013147118)
+billboard = 1
+text = "HP: "
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=950828687]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1403576688]
+script = ExtResource("2_4gyqm")
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
