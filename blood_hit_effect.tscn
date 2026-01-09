@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c6j00antrj7oi"]
+
+[ext_resource type="Script" uid="uid://c7lg0num73g37" path="res://blood_hit_effect.gd" id="1_bin7c"]
+[ext_resource type="AudioStream" uid="uid://b52wmpfxmdk45" path="res://hit-flesh-03-266308.mp3" id="2_ta8st"]
+
+[sub_resource type="Curve" id="Curve_ta8st"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.44000003, 1), 0.0, 0.0, 0, 0, Vector2(0.5721739, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_33nkr"]
+curve = SubResource("Curve_ta8st")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_84ivb"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, 1)
+spread = 90.0
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, -20, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_33nkr")
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inhxe"]
+albedo_color = Color(0.9841762, 0.12627351, 0.11637933, 1)
+emission_enabled = true
+emission = Color(0.7047057, 0.008382777, 3.85046e-07, 1)
+emission_energy_multiplier = 2.91
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_plfjy"]
+material = SubResource("StandardMaterial3D_inhxe")
+top_radius = 0.05
+bottom_radius = 0.01
+height = 0.3
+radial_segments = 20
+rings = 2
+
+[node name="BloodHitEffect" type="Node3D" unique_id=1149236507]
+script = ExtResource("1_bin7c")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=2278155]
+emitting = false
+amount = 6
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_84ivb")
+draw_pass_1 = SubResource("CylinderMesh_plfjy")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1084393975]
+stream = ExtResource("2_ta8st")

@@ -5,12 +5,15 @@ var friction = 5.0
 var is_stunned = false
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
+@onready var stun_effect_visual: Node3D = $StunEffectVisual
 
 @export var status: Label3D 
 @export var health_label: Label3D 
 @export var hp: health_component
 
 @export var movement_speed: float = 1.5
+@export_range(0, 1) var tenacity: float = 0.5
+
 var target_node: Node3D
 
 func _ready() -> void:
@@ -34,15 +37,17 @@ func _physics_process(delta):
 	else:
 		navigation()
 
-func apply_knockback(_from: Vector3):
+func apply_knockback(_from: Vector3, amount):
+	if amount < 5:
+		return
 	is_stunned = true
 	var direction = _from.direction_to(global_position)
 	direction.y = 0.0
-	velocity = direction.normalized() * knockback_strength
+	velocity = direction.normalized() * (amount * tenacity)
 	status.text = "stuned"
-	
-	await get_tree().create_timer(2.5).timeout
-	
+	stun_effect_visual.play()
+	await get_tree().create_timer((amount/10)/tenacity).timeout
+	stun_effect_visual.stop()
 	status.text = "idle"
 	is_stunned = false
 

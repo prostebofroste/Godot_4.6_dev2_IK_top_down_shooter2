@@ -21,7 +21,6 @@ func damage(amount):
 	if current_health == 0:
 		print("obiekt ma zero hp, umiera")
 		died.emit()
-		get_parent().queue_free()
 	pass
 
 func heal():

@@ -41,7 +41,6 @@ func shoot():
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_position = barrel.global_position
 		bullet.global_rotation = barrel.global_rotation
-		print("dodano coś")
 		pass
 func zoom():
 	var t = create_tween()

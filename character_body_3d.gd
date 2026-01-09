@@ -3,23 +3,28 @@ extends CharacterBody3D
 @onready var aim_marker: Marker3D = $AimMarker
 @onready var leg_marker: Marker3D = $LegMarker
 @onready var animation_player: AnimationPlayer = $"Crouched Walking/AnimationPlayer"
+@onready var hp: health_component = $health_component
+@export var attack_power := 10.0
 
 const SPEED = 5.0
 const CHARGE_WALK_SPEED = 3.0 # Nowa stała: prędkość chodzenia podczas ładowania
 const LEG_SMOOTH_SPEED = 10.0
-
 # --- Ustawienia ładowania ataku ---
 const MAX_CHARGE_TIME = 0.2   
 const MIN_KICK_VEL = 0.0      
 const MAX_KICK_VEL = 15.0     
+const FRICTION = 5.0
+
 
 var charge_timer: float = 0.0 
 var is_attacking := false
+var is_stunned := false
+var current_kick_force : float
 
 func _physics_process(delta: float) -> void:
 	# 1. Grawitacja
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity() 
 
 	# 2. Obsługa ładowania ataku (Input)
 	if not is_attacking:
@@ -34,6 +39,12 @@ func _physics_process(delta: float) -> void:
 			charge_timer = 0.0 # Reset licznika PO ataku
 
 	# 3. Logika stanu
+	if is_stunned:
+		var horizontal_velocity = Vector2(velocity.x, velocity.z)
+		var new_horizontal = horizontal_velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		velocity.x = new_horizontal.x
+		velocity.z = new_horizontal.y
+
 	if is_attacking:
 		process_kick_state(delta)
 	else:
@@ -77,7 +88,7 @@ func start_kick():
 	var charge_factor = charge_timer / MAX_CHARGE_TIME
 	charge_factor = clamp(charge_factor, 0.0, 1.0)
 	
-	var current_kick_force = lerp(MIN_KICK_VEL, MAX_KICK_VEL, charge_factor)
+	current_kick_force = lerp(MIN_KICK_VEL, MAX_KICK_VEL, charge_factor)
 	
 	# Kierunek skoku (w stronę celownika)
 	var direction = global_position.direction_to(aim_marker.global_position)
@@ -91,7 +102,7 @@ func start_kick():
 	t.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	var dash_duration = lerp(0.3, 0.8, charge_factor) 
 	t.tween_property(self, "velocity", Vector3.ZERO, dash_duration)
-	
+	print(clamp((attack_power * current_kick_force/10),7,15))
 	is_attacking = true
 	animation_player.play("kick")
 
@@ -110,4 +121,10 @@ func _on_kick_area_body_entered(body: Node3D) -> void:
 		if body.has_method("apply_knockback"):
 			# Możesz teraz uzależnić siłę odrzutu obiektu od naładowania!
 			# Np. body.apply_knockback(global_position, charge_timer)
-			body.apply_knockback(global_position)
+			body.apply_knockback(global_position,(attack_power * (current_kick_force/10)))
+			
+func apply_knockback(_from: Vector3, amount):
+	var direction = _from.direction_to(global_position)
+	direction.y = 0
+	velocity = direction.normalized() * (amount * 3)
+	

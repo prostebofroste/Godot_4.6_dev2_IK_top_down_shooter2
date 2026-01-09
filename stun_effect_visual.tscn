@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://7a7rtdqh2squ"]
+
+[ext_resource type="ArrayMesh" uid="uid://bwr5eqfw11uvh" path="res://star.tres" id="1_l3pta"]
+[ext_resource type="Script" uid="uid://bws4fnvonsgd6" path="res://stun_effect_visual.gd" id="1_uwepv"]
+[ext_resource type="Texture2D" uid="uid://b077l851cy7l6" path="res://Sprite-0001.png" id="2_uwepv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwepv"]
+albedo_color = Color(1, 0.7921569, 0.2509804, 1)
+emission_enabled = true
+emission = Color(0.64483666, 0.57337147, 0.131592, 1)
+emission_energy_multiplier = 12.58
+
+[sub_resource type="Curve" id="Curve_dnqmu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.09217391, 1), 0.0, 0.0, 0, 0, Vector2(0.67130435, 0.98753196), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qgjtc"]
+curve = SubResource("Curve_dnqmu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kiq7s"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, -90, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.16
+emission_ring_inner_radius = 1.56
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+initial_velocity_min = -0.5
+initial_velocity_max = -0.5
+gravity = Vector3(0, 0.5, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = 0.49999776
+tangential_accel_max = 0.49999776
+scale_min = 10.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_qgjtc")
+anim_speed_min = 12.9
+anim_speed_max = 14.2
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 10.0
+
+[sub_resource type="Animation" id="Animation_hcxpg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7ggwy"]
+resource_name = "idle"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.76666665, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.0997047, -0.6195919), Vector3(0, 6.2831855, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D2:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.76666665, 1.5),
+"transitions": PackedFloat32Array(1, 1, 0.03589695),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.54105204, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.76666665, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.61086524, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ww1vu"]
+_data = {
+&"RESET": SubResource("Animation_hcxpg"),
+&"idle": SubResource("Animation_7ggwy")
+}
+
+[node name="StunEffectVisual" type="Node3D" unique_id=720789849]
+script = ExtResource("1_uwepv")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=336256177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33971953, 0)
+material_override = SubResource("StandardMaterial3D_uwepv")
+amount = 6
+lifetime = 2.0
+speed_scale = 2.0
+use_fixed_seed = true
+seed = 1390323849
+process_material = SubResource("ParticleProcessMaterial_kiq7s")
+draw_pass_1 = ExtResource("1_l3pta")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=682156878]
+transform = Transform3D(3.028, 0, 0, 0, 3.028, 0, 0, 0, 3.028, 0, 0, 0)
+axis = 1
+texture = ExtResource("2_uwepv")
+
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=2065726366]
+transform = Transform3D(5.478, 0, 0, 0, 5.478, 0, 0, 0, 5.478, 0, 0, 0)
+axis = 1
+texture = ExtResource("2_uwepv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=835662823]
+libraries/ = SubResource("AnimationLibrary_ww1vu")
+autoplay = &"idle"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1593270015]

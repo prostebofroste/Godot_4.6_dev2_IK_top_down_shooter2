@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://nah222fsur7i"]
 
 [ext_resource type="Script" uid="uid://ds0mm5e6k7o4y" path="res://enemy.gd" id="1_7k104"]
-[ext_resource type="Script" uid="uid://q8mbobkn0lmq" path="res://health_component.gd" id="2_4gyqm"]
+[ext_resource type="Script" uid="uid://q8mbobkn0lmq" path="res://HealthComponent.gd" id="2_4gyqm"]
+[ext_resource type="PackedScene" uid="uid://7a7rtdqh2squ" path="res://stun_effect_visual.tscn" id="3_qi2p4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4gyqm"]
 radius = 0.5991211
@@ -23,6 +24,7 @@ status = NodePath("status")
 health_label = NodePath("status/health")
 hp = NodePath("HealthComponent")
 movement_speed = 2.0
+tenacity = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1493163252]
 transform = Transform3D(1, 6.548362e-11, -3.259629e-09, -1.05501385e-10, 1, 1.6298145e-08, 0, -1.3504177e-08, 0.9999983, 5.456968e-12, 1, -9.313226e-10)
@@ -52,5 +54,8 @@ text = "HP: "
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1403576688]
 script = ExtResource("2_4gyqm")
+
+[node name="StunEffectVisual" parent="." unique_id=720789849 instance=ExtResource("3_qi2p4")]
+transform = Transform3D(0.29, 1.0550138e-12, -5.9162636e-29, -1.0550138e-12, 0.29, 1.3504177e-10, 4.9127915e-22, -1.3504177e-10, 0.29, -8.465849e-05, 2.234018, 0.009675902)
 
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

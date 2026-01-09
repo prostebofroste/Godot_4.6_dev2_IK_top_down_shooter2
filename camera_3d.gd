@@ -39,13 +39,8 @@ func shoot_ray():
 	var raycast_result = space.intersect_ray(ray_query)
 	
 	if not raycast_result.is_empty():
-			# POPRAWKA:
 			if gun_pivot:
-				# 1. Zabezpieczamy, żeby pivot patrzył na punkt uderzenia raycasta
-				# 2. Używamy Vector3.UP, żeby zachować pion
 				gun_pivot.look_at(raycast_result.position, Vector3.UP)
-				
-				# Opcjonalnie: Zablokuj dziwne wykręcanie się osi Z/Roll, jeśli to konieczne
 				gun_pivot.rotation.z = 0 
 				gun_pivot.rotation.x = 0
 
