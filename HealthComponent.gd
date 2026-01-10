@@ -15,7 +15,7 @@ func _ready() -> void:
 func damage(amount):
 	current_health -= amount
 	health_changed.emit(current_health)
-	print("zadano", amount)
+	print("aktualne hp: ",current_health)
 	if current_health < 0:
 		current_health = 0
 	if current_health == 0:

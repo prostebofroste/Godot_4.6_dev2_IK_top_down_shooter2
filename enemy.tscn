@@ -24,7 +24,7 @@ status = NodePath("status")
 health_label = NodePath("status/health")
 hp = NodePath("HealthComponent")
 movement_speed = 2.0
-tenacity = 1.0
+tenacity = 7.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1493163252]
 transform = Transform3D(1, 6.548362e-11, -3.259629e-09, -1.05501385e-10, 1, 1.6298145e-08, 0, -1.3504177e-08, 0.9999983, 5.456968e-12, 1, -9.313226e-10)
@@ -58,4 +58,5 @@ script = ExtResource("2_4gyqm")
 [node name="StunEffectVisual" parent="." unique_id=720789849 instance=ExtResource("3_qi2p4")]
 transform = Transform3D(0.29, 1.0550138e-12, -5.9162636e-29, -1.0550138e-12, 0.29, 1.3504177e-10, 4.9127915e-22, -1.3504177e-10, 0.29, -8.465849e-05, 2.234018, 0.009675902)
 
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

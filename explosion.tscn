@@ -221,7 +221,7 @@ material = SubResource("StandardMaterial3D_l04k4")
 
 [node name="explosion" type="Node3D" unique_id=1735238880]
 script = ExtResource("1_c6a05")
-explosion_dmg = 20.0
+explosion_dmg = 30.0
 
 [node name="debris" type="GPUParticles3D" parent="." unique_id=83841274]
 emitting = false

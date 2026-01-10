@@ -132,5 +132,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -6.9
 [node name="barrel3" parent="." unique_id=1751365008 instance=ExtResource("6_dwbse")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
 
+[node name="barrel5" parent="." unique_id=844434695 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel6" parent="." unique_id=24209622 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel7" parent="." unique_id=1712984456 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel8" parent="." unique_id=92964283 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel9" parent="." unique_id=393197374 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel10" parent="." unique_id=887632984 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel11" parent="." unique_id=1995618387 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
+[node name="barrel12" parent="." unique_id=1966988244 instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -1.2059174)
+
 [node name="barrel4" parent="." unique_id=1028482019 instance=ExtResource("6_dwbse")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8879046, 0.0004992485, -3.55616)

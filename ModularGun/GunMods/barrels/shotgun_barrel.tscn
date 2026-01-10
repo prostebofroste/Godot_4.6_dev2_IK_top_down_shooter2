@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://duhsxofnwbc06"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw4kp"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="shotgun_barrel" type="Node3D" unique_id=454087787]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2115082662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2580566)
+size = Vector3(1.3505859, 1.4118652, 2.4838867)
+material = SubResource("StandardMaterial3D_xw4kp")

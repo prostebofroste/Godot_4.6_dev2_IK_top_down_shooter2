@@ -7,7 +7,7 @@ extends Area3D
 
 @onready var blood_hit_effect: Node3D = $BloodHitEffect
 
-@export var push_power: float = 6
+@export var push_power: float = 9
 @export var SPEED = 20.0
 @export var damage: float = 25.0
 # Called when the node enters the scene tree for the first time.

@@ -3,7 +3,7 @@ extends RigidBody3D
 @export var hp: health_component
 @export var explosion: Node3D 
 @export var model: Node3D 
-@export var knockback_strength: float = 10.0
+@export var knockback_strength: float = 100.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if hp:
@@ -23,6 +23,6 @@ func _death():
 
 func apply_knockback(source_position: Vector3, amount):
 	var direction = source_position.direction_to(global_position)
-	direction.y = 0.5 
+	direction.y = 0.0
 	direction = direction.normalized()
 	apply_central_impulse(direction * (knockback_strength + amount))

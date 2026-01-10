@@ -2564,7 +2564,6 @@ collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_iwpo4")
 hp = NodePath("HealthComponent")
-attack_power = null
 dash_power = 50.0
 max_stamina = 50.0
 

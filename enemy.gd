@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-var knockback_strength = 5.0 
 var friction = 5.0 
 var is_stunned = false
 
@@ -12,9 +11,10 @@ var is_stunned = false
 @export var hp: health_component
 
 @export var movement_speed: float = 1.5
-@export_range(0, 1) var tenacity: float = 0.5
+@export_range(0, 10) var tenacity: float = 0.5
 
 var target_node: Node3D
+var is_damaged: Node3D
 
 func _ready() -> void:
 	hp.died.connect(_death)
@@ -38,21 +38,22 @@ func _physics_process(delta):
 		navigation()
 
 func apply_knockback(_from: Vector3, amount):
-	if amount < 5:
-		return
+	if amount < 10:
+		velocity.z -= 20
 	is_stunned = true
 	var direction = _from.direction_to(global_position)
 	direction.y = 0.0
-	velocity = direction.normalized() * (amount * tenacity)
+	velocity = direction.normalized() * (amount/10 * tenacity)
 	status.text = "stuned"
 	stun_effect_visual.play()
-	await get_tree().create_timer((amount/10)/tenacity).timeout
+	await get_tree().create_timer((amount)/tenacity).timeout
 	stun_effect_visual.stop()
 	status.text = "idle"
 	is_stunned = false
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	if is_stunned: return
+	if is_damaged: return
 	
 	velocity.x = safe_velocity.x
 	velocity.z = safe_velocity.z

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c74k87ndh1tt7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0kq1"]
+albedo_color = Color(1, 0.06666667, 0.3882353, 1)
+emission_enabled = true
+emission = Color(0.6784314, 0, 0.5294118, 1)
+emission_energy_multiplier = 11.83
+
+[node name="AntigravityMag" type="Node3D" unique_id=854681916]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=567891568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7505493, 0.22875977)
+size = Vector3(0.66308594, 1.4989014, 0.54248047)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" unique_id=278731787]
+transform = Transform3D(0.99999976, 0.00023371943, 0.00063902687, -0.00064371945, 0.020662105, 0.99978626, 0.0002204662, -0.9997865, 0.020662256, -0.01385963, 0.011398315, -0.015945375)
+size = Vector3(0.8232422, 0.3046875, 1.1347656)
+material = SubResource("StandardMaterial3D_r0kq1")
