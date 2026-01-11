@@ -3,9 +3,28 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw4kp"]
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="shotgun_barrel" type="Node3D" unique_id=454087787]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xw4kp"]
+size = Vector3(1.7521973, 1.6142578, 2.6923828)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xw4kp"]
+radius = 2.284285
+
+[node name="shotgun_barrel" type="RigidBody3D" unique_id=1597230979 groups=["GunMod"]]
+collision_layer = 2
+collision_mask = 21
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2115082662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2580566)
 size = Vector3(1.3505859, 1.4118652, 2.4838867)
 material = SubResource("StandardMaterial3D_xw4kp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=792111613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.002105713, -1.2600708)
+shape = SubResource("BoxShape3D_xw4kp")
+
+[node name="PickupArea" type="Area3D" parent="." unique_id=983452971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3166342)
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea" unique_id=1089950513]
+shape = SubResource("SphereShape3D_xw4kp")

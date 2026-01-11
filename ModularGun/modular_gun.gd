@@ -25,30 +25,67 @@ func _ready():
 	mount_points[WeaponMod.SlotType.GRIP] = grip_point
 	print("--- SYSTEM GOTOWY ---")
 
-# --- CORE SYSTEMU (To montuje część) ---
 func equip_mod(mod: WeaponMod):
 	if mod == null: return
-	
 	var slot = mod.slot_type
 	
-	# 1. Posprzątaj stary model jeśli był
-	if visual_instances.has(slot):
-		visual_instances[slot].queue_free()
-		
+	# 1. Jeśli coś już jest w tym slocie -> WYRZUĆ TO NA ZIEMIĘ
+	if equipped_mods.has(slot):
+		drop_mod(slot)
+
 	# 2. Zapisz dane
 	equipped_mods[slot] = mod
 	
-	# 3. Zspawnuj nowy model 3D
+	# 3. Zspawnuj obiekt (lub weź istniejący, ale dla uproszczenia instancjonujemy z Resource)
 	if mod.visual_scene and mount_points.has(slot):
-		var parent_marker = mount_points[slot]
-		var new_visual = mod.visual_scene.instantiate()
-		parent_marker.add_child(new_visual)
-		# Reset transformacji żeby pasowało idealnie do markera
-		new_visual.transform = Transform3D.IDENTITY
-		visual_instances[slot] = new_visual
+		var part_instance = mod.visual_scene.instantiate() as RigidBody3D
 		
-	print("Zamontowano: %s w slocie %s" % [mod.mod_name, WeaponMod.SlotType.keys()[slot]])
-	print_current_loadout() # Odśwież UI (print)
+		# --- KLUCZOWE: PRZYSPAWANIE DO BRONI ---
+		mount_points[slot].add_child(part_instance)
+		
+		# Wyłączamy fizykę całkowicie
+		part_instance.freeze = true
+		part_instance.freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+		
+		# Wyłączamy kolizje (żeby nie spychało gracza!)
+		# Zakładam, że warstwa 1 to świat, wyłączamy to.
+		
+		# Reset pozycji do zera (żeby pasowało do markera)
+		part_instance.transform = Transform3D.IDENTITY
+		
+		visual_instances[slot] = part_instance
+		print("Założono: ", mod.mod_name)
+
+
+# --- WYRZUCANIE (Odczep i włącz fizykę) ---
+func drop_mod(slot: WeaponMod.SlotType):
+	if not visual_instances.has(slot): return
+	
+	var part_instance = visual_instances[slot] # To jest nasz RigidBody3D
+	
+	# 1. Odczepiamy od broni (Reparenting)
+	# Musimy zmienić rodzica na "Świat" (czyli np. obecną scenę gry)
+	part_instance.reparent(get_tree().current_scene)
+	
+	# 2. Ustawiamy pozycję startową rzutu
+	# (Dzięki reparent zachowa pozycję w świecie, ale warto go lekko odsunąć)
+	part_instance.global_position = global_position + (global_transform.basis.z * -1.0) # 1 metr przed bronią
+	
+	# --- KLUCZOWE: WŁĄCZENIE FIZYKI ---
+	part_instance.freeze = false
+	
+	# Przywracamy kolizje (żeby odbijał się od podłogi)
+
+	
+	# Lekki rzut do przodu
+	part_instance.linear_velocity = Vector3.ZERO
+	part_instance.apply_impulse(global_transform.basis.z * -5.0) # Wyrzut przed siebie
+	
+	# 3. Czyścimy pamięć broni
+	visual_instances.erase(slot)
+	equipped_mods.erase(slot)
+	
+	print("Wyrzucono mod na ziemię (fizyka on)")
 
 # --- SHOOTING PIPELINE (Tu dzieje się magia Isaaca) ---
 func shoot():

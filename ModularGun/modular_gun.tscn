@@ -1,22 +1,6 @@
 [gd_scene format=3 uid="uid://bp6kmdde24ebj"]
 
 [ext_resource type="Script" uid="uid://cg5nsikbygey8" path="res://ModularGun/modular_gun.gd" id="1_31q7f"]
-[ext_resource type="Script" uid="uid://b0tk6e0gdbyi7" path="res://ModularGun/gun_manager_temp.gd" id="2_mopfg"]
-[ext_resource type="Resource" uid="uid://b1x11c17qat3t" path="res://ModularGun/GunMods/barrels/shotgun_barrel.tres" id="3_gjs3n"]
-[ext_resource type="Resource" uid="uid://dws2eoq8f1ulu" path="res://ModularGun/GunMods/mags/antigrav_mag.tres" id="4_sch0v"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_onet8"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_31q7f"]
-sky_material = SubResource("ProceduralSkyMaterial_onet8")
-
-[sub_resource type="Environment" id="Environment_mopfg"]
-background_mode = 2
-sky = SubResource("Sky_31q7f")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onet8"]
 albedo_color = Color(1, 0.3137255, 1, 1)
@@ -30,19 +14,6 @@ barrel_point = NodePath("BaseRoot/MountPoint/BarrelPoint")
 magazine_point = NodePath("BaseRoot/MountPoint/MagazinePoint")
 scope_point = NodePath("BaseRoot/MountPoint/ScopePoint")
 stock_point = NodePath("BaseRoot/MountPoint/StockPoint")
-
-[node name="GunManagerTemp" type="Node" parent="." unique_id=1355415953 node_paths=PackedStringArray("gun")]
-script = ExtResource("2_mopfg")
-gun = NodePath("..")
-shotgun_barrel_res = ExtResource("3_gjs3n")
-antigrav_mag_res = ExtResource("4_sch0v")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1401027559]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1871970853]
-environment = SubResource("Environment_mopfg")
 
 [node name="BaseRoot" type="Node3D" parent="." unique_id=1041112463]
 
@@ -75,6 +46,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49938548, -0.88168395)
 
 [node name="ScopePoint" type="Marker3D" parent="BaseRoot/MountPoint" unique_id=1115111596]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5259994, -0.4784155)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1027002128]
-transform = Transform3D(-4.2668805e-08, -0.2171041, 0.9761485, -9.489922e-09, 0.9761485, 0.2171041, -1, 0, -4.3711392e-08, 4.2257843, 2.2753897, -1)

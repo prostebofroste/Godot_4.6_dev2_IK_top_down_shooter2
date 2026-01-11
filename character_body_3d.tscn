@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dqtnf4vt0be8y"]
 
-[ext_resource type="Script" uid="uid://bu2h27g4lsxiv" path="res://character_body_3d.gd" id="1_iwpo4"]
+[ext_resource type="Script" uid="uid://bu2h27g4lsxiv" path="res://player_controler.gd" id="1_iwpo4"]
 [ext_resource type="Script" uid="uid://m13l2ebd46k4" path="res://camera_3d.gd" id="2_fb3t6"]
 [ext_resource type="Script" uid="uid://c5kfsn7sg2dwa" path="res://gun.gd" id="3_vd578"]
 [ext_resource type="PackedScene" uid="uid://dtbpx0ds3p3cu" path="res://bullet.tscn" id="4_c7tqt"]

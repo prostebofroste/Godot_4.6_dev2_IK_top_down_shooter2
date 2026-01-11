@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_6x2d3")
-mod_name = "barrek"
+mod_name = "barrel"
 visual_scene = ExtResource("2_am1c5")
