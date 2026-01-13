@@ -68,12 +68,12 @@ gun_pivot = NodePath("../WeaponHolder")
 [node name="ModularGun" parent="CharacterBody3D/WeaponHolder" unique_id=1050853463 instance=ExtResource("3_npll0")]
 transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 1.037, 0.857, -0.529)
 
-[node name="PickupRange" type="Area3D" parent="CharacterBody3D" unique_id=584651386]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7581341, 0)
+[node name="PickupRange" type="Area3D" parent="CharacterBody3D" unique_id=2079022037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5162683, 0)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/PickupRange" unique_id=964043717]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/PickupRange" unique_id=746283093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8169315, 0)
 shape = SubResource("CylinderShape3D_npll0")
 
@@ -92,61 +92,3 @@ transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -2.9802322e-08, 0.
 
 [node name="shotgun_barrel" parent="." unique_id=1597230979 instance=ExtResource("5_dra23")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.967827, 0.39636135, -4.350404)
-
-[node name="eq" type="CanvasLayer" parent="." unique_id=257288441]
-
-[node name="Panel" type="Panel" parent="eq" unique_id=1646167733]
-custom_minimum_size = Vector2(300, 400)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="GridContainer" type="GridContainer" parent="eq/Panel" unique_id=341505077]
-modulate = Color(1, 0.25490198, 1, 1)
-custom_minimum_size = Vector2(250, 350)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 4
-
-[node name="Panel" type="Panel" parent="eq/Panel/GridContainer" unique_id=1358311226]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="eq/Panel/GridContainer/Panel" unique_id=663736610]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "text"
-horizontal_alignment = 1
-vertical_alignment = 3
-
-[connection signal="body_entered" from="CharacterBody3D/PickupRange" to="CharacterBody3D" method="_on_pickup_range_body_entered"]

@@ -46,7 +46,9 @@ func shoot_ray():
 	if not raycast_result.is_empty():
 		var collider = raycast_result["collider"]
 		if collider.is_in_group("GunMod") or (collider.get_parent() and collider.get_parent().is_in_group("GunMod")):
-			print("jest")
+			if Input.is_action_just_pressed("interact"):
+				pick_up(collider)
+				print("podnieisono")
 		if gun_pivot:
 			gun_pivot.look_at(raycast_result.position, Vector3.UP)
 			gun_pivot.rotation.z = 0 
@@ -69,3 +71,14 @@ func follow_target(delta):
 	
 	# Płynne przesuwanie kamery (Lerp)
 	global_position = global_position.lerp(desired_position, delta * smooth_speed)
+	
+func pick_up(dropped: DroppedWeapon):
+	# WAŻNE: Robimy kopię, żeby nie edytować pliku na dysku!
+	var new_weapon_data = dropped.weapon_data.create_instance()
+	gun_pivot.setup(new_weapon_data)
+	dropped.queue_free()
+
+func mount_addon_to_weapon(addon: AddonResource):
+	# Logika montowania z ekwipunku
+	gun_pivot.data.current_addons.append(addon)
+	gun_pivot.visualize() # Odśwież model 3D

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://b1x11c17qat3t"]
-
-[ext_resource type="Script" uid="uid://bguu887c3hesp" path="res://ModularGun/GunMods/barrels/shotgun_barrel.gd" id="1_6x2d3"]
-[ext_resource type="PackedScene" uid="uid://duhsxofnwbc06" path="res://ModularGun/GunMods/barrels/shotgun_barrel.tscn" id="2_am1c5"]
-
-[resource]
-script = ExtResource("1_6x2d3")
-mod_name = "barrel"
-visual_scene = ExtResource("2_am1c5")

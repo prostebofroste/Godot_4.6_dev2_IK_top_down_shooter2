@@ -15,10 +15,6 @@ run/main_scene="uid://vv0hc5560uoq"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-game_data="*uid://l5dcbl1vdw5"
-
 [global_group]
 
 Player=""

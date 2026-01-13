@@ -26,8 +26,3 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
-
-
-func _on_pickup_range_body_entered(body: Node3D) -> void:
-	if body.is_in_group("GunMod"):
-		print(body)
