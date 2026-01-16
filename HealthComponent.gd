@@ -5,8 +5,6 @@ class_name health_component
 signal died
 signal health_changed
 
-
-
 @export var max_health: float = 100.0
 var current_health : float
 func _ready() -> void:

@@ -3,7 +3,8 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-
+@onready var weapon_holder: Node3D = $WeaponHolder
+@export var current_weapon: Node3D
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

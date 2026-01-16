@@ -1,55 +1,54 @@
-[gd_scene format=3 uid="uid://bp6kmdde24ebj"]
+[gd_scene format=3 uid="uid://b2ftlnnyf0ee8"]
 
-[ext_resource type="Script" uid="uid://c4scoyi6x6a5q" path="res://ModularGun/WeaponInstance.gd" id="1_d2nup"]
+[ext_resource type="Script" uid="uid://cg5nsikbygey8" path="res://ModularGun/modular_gun.gd" id="1_d2nup"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onet8"]
 albedo_color = Color(1, 0.3137255, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_31q7f"]
-albedo_color = Color(0.03137255, 1, 1, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ak5f"]
+albedo_color = Color(0, 1, 1, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_d2nup"]
 height = 2.3339844
 radius = 5.9731445
 
 [node name="ModularGun" type="Node3D" unique_id=1050853463]
-
-[node name="Pistol" type="Node3D" parent="." unique_id=1041112463]
 script = ExtResource("1_d2nup")
 
-[node name="BaseModel" type="CSGCombiner3D" parent="Pistol" unique_id=1330317463]
+[node name="BaseModel" type="CSGCombiner3D" parent="." unique_id=1330317463]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Pistol/BaseModel" unique_id=1905408191]
+[node name="CSGBox3D" type="CSGBox3D" parent="BaseModel" unique_id=1905408191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17600435, 0.038900375)
+size = Vector3(0.76660156, 0.5986328, 0.8183594)
 material = SubResource("StandardMaterial3D_onet8")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Pistol/BaseModel" unique_id=417761805]
+[node name="CSGBox3D2" type="CSGBox3D" parent="BaseModel" unique_id=417761805]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
-size = Vector3(1, 1, 2)
+size = Vector3(0.861084, 1, 2)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Pistol/BaseModel" unique_id=2008926412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
-material = SubResource("StandardMaterial3D_31q7f")
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BaseModel" unique_id=1953456420]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.0047722, -1.59164)
+radius = 0.35839844
+height = 0.9316406
+material = SubResource("StandardMaterial3D_2ak5f")
 
-[node name="HandleSocket" type="Marker3D" parent="Pistol" unique_id=193069536]
+[node name="MagazineSocket" type="Marker3D" parent="." unique_id=345297536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12006548, 0.052292824)
 
-[node name="MagazineSocket" type="Marker3D" parent="Pistol" unique_id=345297536]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4926738, -2.1258564)
+[node name="MuzzleSocket" type="Marker3D" parent="." unique_id=1543994494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.97727525, -2.0662732)
 
-[node name="BarrelSocket" type="Marker3D" parent="Pistol" unique_id=1543994494]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.97727525, -2.5497453)
+[node name="StockSocket" type="Marker3D" parent="." unique_id=1733054108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0976952, 0.50784683)
 
-[node name="StockSocket" type="Marker3D" parent="Pistol" unique_id=1733054108]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0046695, 0.50784683)
-
-[node name="GripSocket" type="Marker3D" parent="Pistol" unique_id=465111521]
+[node name="GripSocket" type="Marker3D" parent="." unique_id=465111521]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49938548, -0.88168395)
 
-[node name="ScopeSocket" type="Marker3D" parent="Pistol" unique_id=1115111596]
+[node name="ScopeSocket" type="Marker3D" parent="." unique_id=1115111596]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5259994, -0.4784155)
 
 [node name="PickupRange" type="Area3D" parent="." unique_id=152435533]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7581341, 0)
-visible = false
 collision_layer = 0
 collision_mask = 2
 

@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://m13l2ebd46k4" path="res://camera_3d.gd" id="1_vu4n5"]
 [ext_resource type="Script" uid="uid://dpu2bs8hn0q6g" path="res://test_wordl/character_body_3d.gd" id="1_xvuwt"]
-[ext_resource type="PackedScene" uid="uid://bp6kmdde24ebj" path="res://ModularGun/modular_gun.tscn" id="3_npll0"]
-[ext_resource type="PackedScene" uid="uid://duhsxofnwbc06" path="res://ModularGun/GunMods/barrels/shotgun_barrel.tscn" id="5_dra23"]
+[ext_resource type="PackedScene" uid="uid://b2ftlnnyf0ee8" path="res://ModularGun/modular_gun.tscn" id="3_73cxh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xvuwt"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -40,11 +39,12 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=106072525]
 environment = SubResource("Environment_73cxh")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=802656556]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=802656556 node_paths=PackedStringArray("current_weapon")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7581341, 0)
 collision_layer = 16
 collision_mask = 25
 script = ExtResource("1_xvuwt")
+current_weapon = NodePath("WeaponHolder/ModularGun")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1986715696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9472656, 0)
@@ -55,7 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_npll0")
 
 [node name="Camera3D2" type="Camera3D" parent="CharacterBody3D" unique_id=1760598577 node_paths=PackedStringArray("marker_3d", "target_character", "gun_pivot")]
-transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -2.9802322e-08, 0, 9.802805, -0.5453234)
+transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -2.9802322e-08, 0, 14.32494, -0.5453234)
 current = true
 fov = 70.0
 script = ExtResource("1_vu4n5")
@@ -65,8 +65,8 @@ gun_pivot = NodePath("../WeaponHolder")
 
 [node name="WeaponHolder" type="Node3D" parent="CharacterBody3D" unique_id=1949064089]
 
-[node name="ModularGun" parent="CharacterBody3D/WeaponHolder" unique_id=1050853463 instance=ExtResource("3_npll0")]
-transform = Transform3D(0.36, 0, 0, 0, 0.36, 0, 0, 0, 0.36, 1.037, 0.857, -0.529)
+[node name="ModularGun" parent="CharacterBody3D/WeaponHolder" unique_id=1050853463 instance=ExtResource("3_73cxh")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.835, -0.84)
 
 [node name="PickupRange" type="Area3D" parent="CharacterBody3D" unique_id=2079022037]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5162683, 0)
@@ -89,6 +89,3 @@ size = Vector3(1, 4.4073486, 3.9799805)
 
 [node name="AimMarker" type="Marker3D" parent="." unique_id=431403601]
 transform = Transform3D(1, 0, 0, 0, -2.9802322e-08, 1, 0, -1, -2.9802322e-08, 0.38481915, 6.3809376, -1.4696848)
-
-[node name="shotgun_barrel" parent="." unique_id=1597230979 instance=ExtResource("5_dra23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.967827, 0.39636135, -4.350404)
